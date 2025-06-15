@@ -43,6 +43,7 @@ const clearFields = () => {
     document.getElementById('ferramentaAlugada').value = "";
     document.getElementById('dataAluguel').value = "";
     document.getElementById('dataDevolucaoPrevista').value = "";
+    document.getElementById('comentarios').value = "";
 }
 
 const saveRental = () => {
@@ -55,6 +56,7 @@ const saveRental = () => {
             ferramentaAlugada: document.getElementById('ferramentaAlugada').value,
             dataAluguel: document.getElementById('dataAluguel').value,
             dataDevolucaoPrevista: document.getElementById('dataDevolucaoPrevista').value,
+            comentarios: document.getElementById('comentarios').value // Garante que o valor seja salvo
         }
         const index = document.getElementById('nome').dataset.index
         if (index == 'new') {
@@ -77,6 +79,7 @@ const createRow = (rental, index) => {
         <td data-label="Ferramenta Alugada">${rental.ferramentaAlugada}</td>
         <td data-label="Data Aluguel">${rental.dataAluguel}</td>
         <td data-label="Devolução Prevista">${rental.dataDevolucaoPrevista}</td>
+        <td data-label="Comentários">${rental.comentarios || ''}</td>
         <td data-label="Ação">
             <button type="button" class="button green" id="edit-${index}">Editar</button>
             <button type="button" class="button red" id="delete-${index}" >Excluir</button>
@@ -104,6 +107,7 @@ const fillFields = (rental) => {
     document.getElementById('ferramentaAlugada').value = rental.ferramentaAlugada || "";
     document.getElementById('dataAluguel').value = rental.dataAluguel || "";
     document.getElementById('dataDevolucaoPrevista').value = rental.dataDevolucaoPrevista || "";
+    document.getElementById('comentarios').value = rental.comentarios || ""; // Garante que 'undefined' não apareça
     document.getElementById('nome').dataset.index = rental.index
 }
 
