@@ -175,7 +175,6 @@ const fillFields = (rental) => {
     document.getElementById('dataAluguel').value = rental.dataAluguel || "";
     document.getElementById('dataDevolucaoPrevista').value = rental.dataDevolucaoPrevista || "";
     document.getElementById('comentarios').value = rental.comentarios || "";
-    // Não precisamos preencher o campo de preço total no modal, ele é calculado
     document.getElementById('nome').dataset.index = rental.index
 }
 
