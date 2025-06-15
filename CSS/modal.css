@@ -69,15 +69,8 @@
     box-shadow: 0 0 2px var(--shadow-color);
     padding: 0 10px;
     font-size: 1rem;
-    box-sizing: border-box; 
+    box-sizing: border-box;
     border: 1px solid var(--shadow-color);
-}
-
-.modal-field#comentarios {
-    width: 100%;
-    min-height: 80px;
-    resize: vertical;
-    padding-top: 10px;
 }
 
 .modal-field:focus {
@@ -91,7 +84,6 @@
     padding: 0 20px;
 }
 
-/* MEDIA QUERY PARA MODAL (ESPECÍFICO DE MOBILE) */
 @media (max-width: 480px) {
     .modal {
         top: 100%;

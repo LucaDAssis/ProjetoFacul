@@ -1,58 +1,54 @@
 .records {
     width: 100%;
-    user-select: none;
-    text-align: left;
     border-collapse: collapse;
+    margin: 20px 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
 }
 
-.records th {
-    height: 50px;
-    background-color: var(--primary-color);
-    padding-left: 20px;
-    font-size: 1.2rem;
-    color: var(--text-color);
+.records thead {
+    background-color: #4CAF50;
+    color: white;
 }
 
+.records th,
 .records td {
-    height: 50px;
-    padding-left: 20px;
-    border-bottom: 1px solid var(--shadow-color);
-    background-color: #FFF;
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
 }
 
-.records th:last-child,
-.records td:last-child {
-    padding: 0;
-    min-width: 140px;
-    text-align: center;
+.records tbody tr:nth-child(even) {
+    background-color: #f8f8f8;
 }
 
-.records tr:hover {
-    background-color: var(--secondary-color);
+.records tbody tr:hover {
+    background-color: #e0e0e0;
+    cursor: pointer;
 }
 
-/* Estilos para o container dos botões no CRUD */
-#crudContainer {
-    width: 100%; 
-    display: flex; 
-    flex-direction: column; 
-    gap: 20px; 
-    align-items: flex-start; 
+.records tbody tr:last-child td {
+    border-bottom: none;
 }
 
-/* Container específico para os botões "Voltar" e "Cadastrar" */
-.crud-buttons-top {
-    display: flex;
-    gap: 10px; 
-    margin-bottom: 10px; 
-    flex-wrap: wrap; 
+@media (max-width: 768px) {
+    .records {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    .records th,
+    .records td {
+        min-width: 120px;
+    }
 }
 
-
-/* MEDIA QUERY PARA TABELA (ESPECÍFICO DE MOBILE) */
 @media (max-width: 480px) {
     .records {
         border-spacing: 5px;
+        width: 100%;
     }
 
     .records thead {
@@ -72,7 +68,7 @@
         border-bottom: none;
         background-color: #FFF;
     }
-    
+
     .records td::before {
         content: attr(data-label);
         font-weight: bold;
@@ -88,18 +84,7 @@
         gap: 10px;
     }
 
-    .records tr:hover {
+    .records tbody tr:hover {
         background-color: inherit;
-    }
-
-    
-    #crudContainer {
-        align-items: center; 
-    }
-    .crud-buttons-top {
-        justify-content: center; 
-        width: 100%;
-        padding: 0 20px;
-        box-sizing: border-box;
     }
 }

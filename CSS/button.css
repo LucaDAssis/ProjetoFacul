@@ -10,21 +10,44 @@
 }
 
 .button.blue {
-    background-color: #1FB6FF;
+    background-color: #2196F3;
+    color: white;
 }
 
-button.green {
-    background-color: var(--button-edit-color);
-    color: var(--text-light-color);
+.button.blue:hover {
+    background-color: #0b7dda;
 }
 
-button.red {
-    background-color: var(--button-delete-color);
-    color: var(--text-light-color);
+.button.green {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.button.green:hover {
+    background-color: #45a049;
+}
+
+.button.red {
+    background-color: #f44336;
+    color: white;
+}
+
+.button.red:hover {
+    background-color: #da190b;
 }
 
 .button:hover {
     box-shadow: inset 200px 0 0 #00000055;
+}
+
+.records td .button {
+    padding: 6px 12px;
+    font-size: 0.85em;
+    margin: 2px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 @media (max-width: 480px) {
@@ -35,7 +58,7 @@ button.red {
         height: 50px;
         border-radius: 50%;
         position: fixed;
-        top: 90vh; 
+        top: 90vh;
         left: 80vw;
         display: flex;
         justify-content: center;

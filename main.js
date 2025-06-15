@@ -27,7 +27,7 @@ const readRental = () => getLocalStorage()
 
 const createRental = (rental) => {
     const dbToolRental = getLocalStorage()
-    dbToolRental.push (rental)
+    dbToolRental.push(rental)
     setLocalStorage(dbToolRental)
 }
 
@@ -39,11 +39,10 @@ const clearFields = () => {
     const fields = document.querySelectorAll('.modal-field')
     fields.forEach(field => field.value = "")
     document.getElementById('nome').dataset.index = 'new'
-    document.querySelector(".modal-header>h2").textContent  = 'Novo Aluguel'
-    document.getElementById('ferramentaAlugada').value = ""; 
+    document.querySelector(".modal-header>h2").textContent = 'Novo Aluguel'
+    document.getElementById('ferramentaAlugada').value = "";
     document.getElementById('dataAluguel').value = "";
     document.getElementById('dataDevolucaoPrevista').value = "";
-    document.getElementById('comentarios').value = ""; 
 }
 
 const saveRental = () => {
@@ -56,7 +55,6 @@ const saveRental = () => {
             ferramentaAlugada: document.getElementById('ferramentaAlugada').value,
             dataAluguel: document.getElementById('dataAluguel').value,
             dataDevolucaoPrevista: document.getElementById('dataDevolucaoPrevista').value,
-            comentarios: document.getElementById('comentarios').value 
         }
         const index = document.getElementById('nome').dataset.index
         if (index == 'new') {
@@ -79,7 +77,6 @@ const createRow = (rental, index) => {
         <td data-label="Ferramenta Alugada">${rental.ferramentaAlugada}</td>
         <td data-label="Data Aluguel">${rental.dataAluguel}</td>
         <td data-label="Devolução Prevista">${rental.dataDevolucaoPrevista}</td>
-        <td data-label="Comentários">${rental.comentarios || ''}</td>
         <td data-label="Ação">
             <button type="button" class="button green" id="edit-${index}">Editar</button>
             <button type="button" class="button red" id="delete-${index}" >Excluir</button>
@@ -104,10 +101,9 @@ const fillFields = (rental) => {
     document.getElementById('email').value = rental.email
     document.getElementById('celular').value = rental.celular
     document.getElementById('cidade').value = rental.cidade
-    document.getElementById('ferramentaAlugada').value = rental.ferramentaAlugada || ""; 
+    document.getElementById('ferramentaAlugada').value = rental.ferramentaAlugada || "";
     document.getElementById('dataAluguel').value = rental.dataAluguel || "";
     document.getElementById('dataDevolucaoPrevista').value = rental.dataDevolucaoPrevista || "";
-    document.getElementById('comentarios').value = rental.comentarios || "";
     document.getElementById('nome').dataset.index = rental.index
 }
 
@@ -174,5 +170,5 @@ document.getElementById('voltarHome')
     .addEventListener('click', () => toggleView('home'));
 
 document.addEventListener('DOMContentLoaded', () => {
-    toggleView('home'); 
+    toggleView('home');
 });
