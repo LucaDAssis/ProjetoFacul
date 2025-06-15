@@ -1,17 +1,17 @@
 .hero {
     text-align: center;
-    max-width: 800px; /* Limita a largura do texto */
-    margin: 0 auto; /* Centraliza a seção */
+    max-width: 800px; 
+    margin: 0 auto; 
     padding: 40px 20px;
     display: flex;
     flex-direction: column;
     gap: 20px;
-    align-items: center; /* Centraliza o botão */
+    align-items: center; 
 }
 
 .hero-title {
     font-size: 2.5rem;
-    color: var(--primary-color); /* Usando sua cor primária */
+    color: var(--primary-color); 
     margin-bottom: 10px;
 }
 
@@ -22,13 +22,10 @@
     margin-bottom: 20px;
 }
 
-/* Remova ou ajuste o display flex-start de main, se necessário */
 main {
-    /* ... estilos existentes ... */
-    align-items: center; /* Alinha o conteúdo da main no centro */
+    align-items: center; 
 }
 
-/* No media query de mobile para main.css, ajuste também: */
 @media (max-width: 480px){
     .hero-title {
         font-size: 1.8rem;

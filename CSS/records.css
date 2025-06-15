@@ -1,10 +1,11 @@
 .records {
     width: 100%;
     border-collapse: collapse;
-    margin: 20px 0;
+    margin: 0;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     overflow: hidden;
+    table-layout: fixed;
 }
 
 .records thead {
@@ -20,6 +21,41 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.records th:nth-child(1), .records td:nth-child(1) { width: 12%; }
+.records th:nth-child(2), .records td:nth-child(2) { width: 10%; }
+.records th:nth-child(3), .records td:nth-child(3) { width: 14%; }
+.records th:nth-child(4), .records td:nth-child(4) { width: 11%; }
+.records th:nth-child(5), .records td:nth-child(5) { width: 11%; }
+.records th:nth-child(6), .records td:nth-child(6) {
+    width: 15%;
+    white-space: normal;
+    max-height: 300px;
+    overflow-y: auto;
+    text-overflow: clip;
+}
+.records th:nth-child(7), .records td:nth-child(7) {
+    width: 14%;
+    white-space: nowrap;
+    overflow: visible;
+    text-overflow: clip;
+}
+.records th:nth-child(8), .records td:nth-child(8) {
+    width: 13%;
+    white-space: nowrap;
+    overflow: visible;
+    text-overflow: clip;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.records td:nth-child(8) .button {
+    margin: 0 2px;
+    display: inline-block;
+    min-width: 60px;
 }
 
 .records tbody tr:nth-child(even) {
@@ -38,26 +74,8 @@
 @media (max-width: 768px) {
     .records {
         display: block;
-        overflow-x: auto;
-        white-space: nowrap;
-    }
-
-    .records th,
-    .records td {
-        min-width: 120px;
-    }
-
-    .records td:last-child {
-        min-width: 150px;
-    }
-}
-
-@media (max-width: 480px) {
-    .records {
-        border-spacing: 5px;
         width: 100%;
-        display: block;
-        overflow-x: hidden;
+        table-layout: auto;
     }
 
     .records thead {
@@ -83,6 +101,14 @@
         flex-wrap: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
+        width: 100%;
+    }
+
+    .records td:nth-child(6) {
+        max-height: 150px;
+        overflow-y: auto;
+        text-overflow: clip;
+        white-space: normal;
     }
 
     .records td::before {
@@ -102,9 +128,6 @@
         white-space: normal;
         overflow: visible;
         text-overflow: clip;
-    }
-
-    .records tbody tr:hover {
-        background-color: inherit;
+        padding-bottom: 8px;
     }
 }
