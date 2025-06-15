@@ -1,0 +1,105 @@
+.records {
+    width: 100%;
+    user-select: none;
+    text-align: left;
+    border-collapse: collapse;
+}
+
+.records th {
+    height: 50px;
+    background-color: var(--primary-color);
+    padding-left: 20px;
+    font-size: 1.2rem;
+    color: var(--text-color);
+}
+
+.records td {
+    height: 50px;
+    padding-left: 20px;
+    border-bottom: 1px solid var(--shadow-color);
+    background-color: #FFF;
+}
+
+.records th:last-child,
+.records td:last-child {
+    padding: 0;
+    min-width: 140px;
+    text-align: center;
+}
+
+.records tr:hover {
+    background-color: var(--secondary-color);
+}
+
+/* Estilos para o container dos botões no CRUD */
+#crudContainer {
+    width: 100%; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 20px; 
+    align-items: flex-start; 
+}
+
+/* Container específico para os botões "Voltar" e "Cadastrar" */
+.crud-buttons-top {
+    display: flex;
+    gap: 10px; 
+    margin-bottom: 10px; 
+    flex-wrap: wrap; 
+}
+
+
+/* MEDIA QUERY PARA TABELA (ESPECÍFICO DE MOBILE) */
+@media (max-width: 480px) {
+    .records {
+        border-spacing: 5px;
+    }
+
+    .records thead {
+        display: none;
+    }
+
+    .records tr {
+        box-shadow: 0 1px 3px var(--shadow-color);
+        margin-bottom: 10px;
+        display: block;
+    }
+
+    .records td {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 20px;
+        border-bottom: none;
+        background-color: #FFF;
+    }
+    
+    .records td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        margin-right: 10px;
+    }
+
+    .records th:last-child,
+    .records td:last-child {
+        min-width: initial;
+        padding: 10px 20px;
+        text-align: left;
+        justify-content: flex-start;
+        gap: 10px;
+    }
+
+    .records tr:hover {
+        background-color: inherit;
+    }
+
+    
+    #crudContainer {
+        align-items: center; 
+    }
+    .crud-buttons-top {
+        justify-content: center; 
+        width: 100%;
+        padding: 0 20px;
+        box-sizing: border-box;
+    }
+}

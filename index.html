@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,400;0,700;1,200;1,800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/button.css">
+    <link rel="stylesheet" href="css/records.css">
+    <link rel="stylesheet" href="css/modal.css">
+    <script src="main.js" defer></script>
+    <title>Gerenciador de Ferramentas</title>
+</head>
+
+<body>
+    <header>
+        <h1 class="header-title">Aluguel de Ferramentas</h1>
+    </header>
+    <main>
+        <section class="hero">
+            <h2 class="hero-title">Bem-vindo à Ferramenta Construtiva: Seu Parceiro em Equipamentos!</h2>
+            <p class="hero-text">
+                Na Ferramenta Construtiva, facilitamos o acesso a equipamentos de qualidade para sua obra.
+                Alugue pás, carrinhos de mão, marteletes e muito mais com agilidade e preços justos.
+            </p>
+            <button type="button" class="button blue" id="irParaCadastro">Gerenciar Aluguéis</button>
+        </section>
+
+        <div id="crudContainer" style="display: none;"> 
+            <div class="crud-buttons-top">
+                <button type="button" class="button blue" id="voltarHome">Voltar para Home</button>
+                <button type="button" class="button blue" id="cadastrarCliente">Registrar Aluguel</button>
+            </div>
+            
+            <table id="tableClient" class="records">
+                <thead>
+                    <tr>
+                        <th>Nome Cliente</th>
+                        <th>Celular</th>
+                        <th>Ferramenta Alugada</th>
+                        <th>Data Aluguel</th>
+                        <th>Devolução Prevista</th>
+                        <th>Comentários</th> 
+                        <th>Ação</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="modal" id="modal">
+            <div class="modal-content">
+                <header class="modal-header">
+                    <h2>Novo Aluguel</h2>
+                    <span class="modal-close" id="modalClose">&#10006;</span>
+                </header>
+                <form id="form" class="modal-form">
+                    <input type="text" id="nome" data-index="new" class="modal-field" placeholder="Nome do Cliente"
+                        required>
+                    <input type="email" id="email" class="modal-field" placeholder="E-mail do Cliente" required>
+                    <input type="text" id="celular" class="modal-field" placeholder="Celular do Cliente" required>
+                    <input type="text" id="cidade" class="modal-field" placeholder="Cidade do Cliente" required>
+                    
+                    <select id="ferramentaAlugada" class="modal-field" required>
+                        <option value="" disabled selected>Selecione a Ferramenta</option>
+                        <option value="Pá">Pá</option>
+                        <option value="Carrinho de Mão">Carrinho de Mão</option>
+                        <option value="Martelete">Martelete</option>
+                        <option value="Betoneira">Betoneira</option>
+                        <option value="Furadeira">Furadeira</option>
+                        <option value="Serra Elétrica">Serra Elétrica</option>
+                        <option value="Andaime">Andaime</option>
+                        <option value="Nível a Laser">Nível a Laser</option>
+                    </select>
+
+                    <input type="date" id="dataAluguel" class="modal-field" placeholder="Data do Aluguel" required>
+                    <input type="date" id="dataDevolucaoPrevista" class="modal-field" placeholder="Devolução Prevista" required>
+
+                    <textarea id="comentarios" class="modal-field" placeholder="Adicione comentários ou observações"></textarea>
+                </form>
+                <footer class="modal-footer">
+                    <button id="salvar" class="button green">Salvar</button>
+                    <button id="cancelar" class="button blue">Cancelar</button>
+                </footer>
+            </div>
+        </div>
+    </main>
+    <footer>
+        Copyright &copy; Prof. Fernando Leonid
+    </footer>
+</body>
+
+</html>
