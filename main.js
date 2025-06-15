@@ -46,17 +46,83 @@ const clearFields = () => {
     document.getElementById('comentarios').value = "";
 }
 
+// Mapa de preços das ferramentas
+const toolPrices = {
+    'Pá': 15.00,
+    'Carrinho de Mão': 20.00,
+    'Martelete': 80.00,
+    'Betoneira': 120.00,
+    'Furadeira': 30.00,
+    'Serra Elétrica': 45.00,
+    'Andaime': 25.00, // Preço por mês, conforme sua lista original
+    'Nível a Laser': 70.00
+};
+
+// Função para calcular o preço total
+const calculateTotalPrice = (toolName, rentalDate, returnDate) => {
+    const pricePerUnit = toolPrices[toolName];
+    if (!pricePerUnit) return 'N/A'; // Ferramenta não encontrada no mapa de preços
+
+    const start = new Date(rentalDate + 'T00:00:00'); // Adiciona T00:00:00 para evitar problemas de fuso horário
+    const end = new Date(returnDate + 'T00:00:00');
+
+    if (isNaN(start.getTime()) || isNaN(end.getTime()) || start > end) {
+        return 'Data Inválida';
+    }
+
+    // Calcula a diferença em dias
+    const diffTime = Math.abs(end - start);
+    let diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+    // Para o andaime, o cálculo é por mês. Se for por mês, pode-se ajustar a lógica.
+    // Por simplicidade, vamos considerar dias para todas e o andaime teria um valor alto por dia para simular o mês.
+    // Ou, se a ideia é alugar andaime por mês, a lógica pode ser mais complexa (ex: alugou por 10 dias, cobra 1 mês).
+    // Para este exemplo, vamos considerar que o preço do andaime (R$ 25,00) é para o período mínimo e pode ser multiplicado por "meses"
+    // Aqui vou manter a lógica simples de dias para todos, se Andaime é mensal, o valor de 25/mês deve ser ajustado para diário (25/30)
+    // Ou, se o aluguel do andaime for por mês, e o período for menor que 30 dias, ainda cobra-se o valor de um mês.
+    // Vou usar a lógica de dias, e se for andaime, ele se comporta diferente ou seu valor diário já está adequado.
+
+    // Ajuste para Andaime: se o período for menor ou igual a 30 dias, cobra 1 mês de R$ 25,00.
+    // Se for maior que 30 dias, multiplica o número de meses pelo valor. Simplificando para cálculo diário para agora.
+    if (toolName === 'Andaime') {
+        // Exemplo simples: cada 30 dias completos ou fração inicial é 1 mês
+        const daysInMonth = 30; // Considerando 30 dias para um mês para cálculo
+        const totalMonths = Math.ceil(diffDays / daysInMonth);
+        return (totalMonths * pricePerUnit).toFixed(2);
+    } else {
+        // Para outras ferramentas, preço por dia
+        // Se a diferença for 0 dias (mesmo dia de aluguel e devolução), considerar 1 dia de aluguel.
+        if (diffDays === 0 && start.toDateString() === end.toDateString()) {
+             diffDays = 1;
+        } else if (diffDays === 0 && start.toDateString() !== end.toDateString()) {
+            // Este caso não deveria acontecer se a data final é sempre maior ou igual à inicial
+            // mas para garantir que pelo menos 1 dia seja cobrado se as datas são válidas mas a diff é 0
+            diffDays = 1;
+        }
+
+        return (diffDays * pricePerUnit).toFixed(2);
+    }
+};
+
+
 const saveRental = () => {
     if (isValidFields()) {
+        const toolName = document.getElementById('ferramentaAlugada').value;
+        const rentalDate = document.getElementById('dataAluguel').value;
+        const returnDate = document.getElementById('dataDevolucaoPrevista').value;
+
+        const totalPrice = calculateTotalPrice(toolName, rentalDate, returnDate);
+
         const rental = {
             nome: document.getElementById('nome').value,
             email: document.getElementById('email').value,
             celular: document.getElementById('celular').value,
             cidade: document.getElementById('cidade').value,
-            ferramentaAlugada: document.getElementById('ferramentaAlugada').value,
-            dataAluguel: document.getElementById('dataAluguel').value,
-            dataDevolucaoPrevista: document.getElementById('dataDevolucaoPrevista').value,
-            comentarios: document.getElementById('comentarios').value // Garante que o valor seja salvo
+            ferramentaAlugada: toolName,
+            dataAluguel: rentalDate,
+            dataDevolucaoPrevista: returnDate,
+            comentarios: document.getElementById('comentarios').value,
+            precoTotal: totalPrice // Armazena o preço total calculado
         }
         const index = document.getElementById('nome').dataset.index
         if (index == 'new') {
@@ -80,6 +146,7 @@ const createRow = (rental, index) => {
         <td data-label="Data Aluguel">${rental.dataAluguel}</td>
         <td data-label="Devolução Prevista">${rental.dataDevolucaoPrevista}</td>
         <td data-label="Comentários">${rental.comentarios || ''}</td>
+        <td data-label="Preço Total">R$ ${rental.precoTotal || '0,00'}</td>
         <td data-label="Ação">
             <button type="button" class="button green" id="edit-${index}">Editar</button>
             <button type="button" class="button red" id="delete-${index}" >Excluir</button>
@@ -107,7 +174,8 @@ const fillFields = (rental) => {
     document.getElementById('ferramentaAlugada').value = rental.ferramentaAlugada || "";
     document.getElementById('dataAluguel').value = rental.dataAluguel || "";
     document.getElementById('dataDevolucaoPrevista').value = rental.dataDevolucaoPrevista || "";
-    document.getElementById('comentarios').value = rental.comentarios || ""; // Garante que 'undefined' não apareça
+    document.getElementById('comentarios').value = rental.comentarios || "";
+    // Não precisamos preencher o campo de preço total no modal, ele é calculado
     document.getElementById('nome').dataset.index = rental.index
 }
 

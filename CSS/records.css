@@ -49,6 +49,7 @@
     .records {
         border-spacing: 5px;
         width: 100%;
+        display: table;
     }
 
     .records thead {
@@ -59,29 +60,32 @@
         box-shadow: 0 1px 3px var(--shadow-color);
         margin-bottom: 10px;
         display: block;
+        padding: 10px;
+        background-color: #FFF;
+        border-radius: 8px;
     }
 
     .records td {
         display: flex;
         justify-content: space-between;
-        padding: 10px 20px;
+        padding: 8px 0;
         border-bottom: none;
-        background-color: #FFF;
+        align-items: center;
+        flex-wrap: wrap;
     }
 
     .records td::before {
         content: attr(data-label);
         font-weight: bold;
         margin-right: 10px;
+        flex-shrink: 0;
     }
 
-    .records th:last-child,
     .records td:last-child {
-        min-width: initial;
-        padding: 10px 20px;
-        text-align: left;
-        justify-content: flex-start;
+        justify-content: center;
         gap: 10px;
+        padding-top: 15px;
+        border-top: 1px solid #eee;
     }
 
     .records tbody tr:hover {
